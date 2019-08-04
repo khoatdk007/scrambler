@@ -15,6 +15,11 @@ module.exports.run = async (bot, message, args, cube) => {
 		}
 		msgArr.push(scramble.join(" "));
 	}
-	message.channel.send(msgArr.join("\n\n"));
+	let embed = new Discord.RichEmbed()
+					.setTitle("Scrambles :");
+	for (let i = 0; i < msgArr.length; i++) {
+		embed.addField(i, msgArr[i]);
+	}
+	return message.channel.send(embed);
 };
 module.exports.config = { name: "2x2x3", aliases: ["tower", "towercube", "2x3"] };

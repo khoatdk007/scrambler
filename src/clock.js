@@ -1,3 +1,4 @@
+const Discord = require("discord.js");
 module.exports.run = async (bot, message, args, cube) => {
 	let arr1 = ["UR", "DR", "DL", "UL", "U", "R", "D", "L", "All"];
 	let arr2 = ["U", "R", "D", "L", "All"];
@@ -31,6 +32,11 @@ module.exports.run = async (bot, message, args, cube) => {
 		}
 		msgArr.push(scramble.join(" "));
 	}
-	return message.channel.send(msgArr.join("\n\n"));
+	let embed = new Discord.RichEmbed()
+					.setTitle("Scrambles :");
+	for (let i = 0; i < msgArr.length; i++) {
+		embed.addField(i, msgArr[i]);
+	}
+	return message.channel.send(embed);
 };
 module.exports.config = { name: "clock", aliases: ["watch"] };

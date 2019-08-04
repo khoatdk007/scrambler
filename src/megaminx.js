@@ -1,3 +1,4 @@
+const Discord = require("discord.js");
 module.exports.run = async (bot, message, args, cube) => {
 	let msgArr = [];
 	let scrambles = parseInt(args[0]);
@@ -15,6 +16,11 @@ module.exports.run = async (bot, message, args, cube) => {
 		}
 		msgArr.push(`\`\`\`\n${scramble.join(" ").replace(/U\n R/g, "U\nR").replace(/U'\n R/g, "U\'\nR")}\n\`\`\``);
 	}
-	return message.channel.send(msgArr.join("\n\n"));
+	let embed = new Discord.RichEmbed()
+					.setTitle("Scrambles :");
+	for (let i = 0; i < msgArr.length; i++) {
+		embed.addField(i, msgArr[i]);
+	}
+	return message.channel.send(embed);
 };
 module.exports.config = { name: "megaminx", aliases: ["mega", "minx", "mm"] };

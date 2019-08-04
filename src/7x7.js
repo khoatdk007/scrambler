@@ -1,3 +1,4 @@
+const Discord = require("discord.js");
 module.exports.run = async (bot, message, args) => {
 	let msgArr = [];
 	let scrambles = parseInt(args[0]);
@@ -18,6 +19,11 @@ module.exports.run = async (bot, message, args) => {
 		}
 		msgArr.push(scramble.map(index => Math.random() < 0.5 ? index += "2" : index += "\'").join(" "));
 	}
-	return message.channel.send(msgArr.join("\n\n"));
+	let embed = new Discord.RichEmbed()
+					.setTitle("Scrambles :");
+	for (let i = 0; i < msgArr.length; i++) {
+		embed.addField(i, msgArr[i]);
+	}
+	return message.channel.send(embed);
 };
 module.exports.config = { name: "7x7", aliases: ["7x7x7", "superrubikscube"] };
