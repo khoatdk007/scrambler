@@ -6,7 +6,7 @@ module.exports.run = async (bot, message, args, cube) => {
 	let embed = new Discord.RichEmbed()
 					.setTitle("Scrambles :");
 	for (let i = 0; i < scramble.length; i++) {
-		embed.addField(i, scramble[i]);
+		embed.addField(i+1, scramble[i]);
 	}
 	return message.channel.send(embed);
 };
