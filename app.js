@@ -35,7 +35,7 @@ bot.on("ready", async () => {
 	console.log(`All commands loaded!`);
 
 	const mongoClient = await mongodb.MongoClient.connect(process.env.MongoDB, { useNewUrlParser: true });
-	const db = await mongoClient.db("Scrambler");
+	const db = await mongoClient.db("scrambler");
 	bot.guildData = await db.collection("guildData");
 	bot.compResults = await db.collection("Results");
 
