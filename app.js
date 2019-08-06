@@ -9,7 +9,7 @@ const channelWarn = new Set();
 const mongodb = require("mongodb");
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
-bot.settings = require("./settings.json");
+require("dotenv").config();
 
 fs.readdir("./src/", (err, files) => {
 	if(err) console.error(err);
@@ -34,7 +34,7 @@ bot.on("error", console.error);
 bot.on("ready", async () => {
 	console.log(`All commands loaded!`);
 
-	const mongoClient = await mongodb.MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true });
+	const mongoClient = await mongodb.MongoClient.connect(process.env.MongoDB, { useNewUrlParser: true });
 	const db = await mongoClient.db("Scrambler");
 	bot.guildData = await db.collection("guildData");
 	bot.compResults = await db.collection("Results");
@@ -47,7 +47,7 @@ bot.on("ready", async () => {
 	const snekfetch = require("snekfetch");
 
 	snekfetch.post(`https://discordbots.org/api/bots/${bot.user.id}/stats`)
-		.set("Authorization", bot.settings.DBLKey)
+		.set("Authorization", process.env.DBLKey)
 		.send({ server_count: bot.guilds.size })
 		.then(() => console.log(`Stats posted to DBL.`))
 		.catch((error) => console.error(error));
@@ -95,7 +95,7 @@ bot.on("message", async message => {
 	let prefix1;
 	let guild = await bot.guildData.findOne({ guildID: message.guild.id }, { _id: 0 });
 	if(guild && guild.prefix) prefix1 = guild.prefix;
-	let prefix2 = bot.settings.prefix;
+	let prefix2 = process.env.prefix;
 	let prefix3 = message.guild.me.nickname ? `<@!${bot.user.id}>` : `<@${bot.user.id}>`;
 
 	messageArr[0] = messageArr[0].toLowerCase();
@@ -174,4 +174,4 @@ process.on("unhandledRejection", error => {
 	console.error(`Uncaught Promise Error: \n${error.stack}`);
 });
 
-bot.login(bot.settings.token);
+bot.login(process.env.token);
