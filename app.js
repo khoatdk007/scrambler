@@ -43,14 +43,14 @@ bot.on("ready", async () => {
 	await bot.user.setActivity(`Scrambling cubes for ${bot.guilds.size} servers! | s!help`);
 	// await bot.user.setActivity(`s!updates | Scrambling cubes for ${bot.guilds.size} servers`);
 	console.log("Scrambler is ready to go!");
-
+/*
 	const snekfetch = require("snekfetch");
 
 	snekfetch.post(`https://discordbots.org/api/bots/${bot.user.id}/stats`)
 		.set("Authorization", process.env.DBLKey)
 		.send({ server_count: bot.guilds.size })
 		.then(() => console.log(`Stats posted to DBL.`))
-		.catch((error) => console.error(error));
+		.catch((error) => console.error(error));*/
 });
 
 bot.on("guildCreate", async guild => {
