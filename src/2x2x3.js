@@ -1,3 +1,4 @@
+const Discord = require("discord.js");
 module.exports.run = async (bot, message, args, cube) => {
 	let msgArr = [];
 	let scrambles = parseInt(args[0]);
