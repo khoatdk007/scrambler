@@ -4,7 +4,7 @@
 /* eslint-disable indent */
 // lol eslint was pretty annoying on this one with all the borrowed code
 // Redi cube scramble generator by xyzzy, sourced from https://torchlight.github.io/rediscrambler.js
-
+const Discord = require("discord.js");
 module.exports.run = async (bot, message, args, cube) => {
 	// Redi cube scramble generator by xyzzy, sourced from https://torchlight.github.io/rediscrambler.js
 
@@ -524,14 +524,15 @@ module.exports.run = async (bot, message, args, cube) => {
 		}
 	}
 
-	let msgArr = [];
 	let scrambles = parseInt(args[0]);
 	scrambles = scrambles ? scrambles > 12 ? 12 : scrambles < 0 ? 1 : scrambles : 1;
-    for(let x = 0; x < scrambles; x++) {
+	let embed = new Discord.RichEmbed()
+					.setTitle("Scrambles :");
+	for(let i = 0; i < scrambles; i++) {
 		let scramble = generate_scramble_sequence();
-		msgArr.push(scramble);
+		embed.addField(i + 1 + ".", "```" + scramble + "```");
 	}
-	return message.channel.send(msgArr.join("\n\n"));
+	return message.channel.send(embed);
 };
 
 module.exports.config = { name: "redi", aliases: ["redicube"] };

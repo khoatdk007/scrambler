@@ -22,7 +22,7 @@ module.exports.run = async (bot, message, args) => {
 	let embed = new Discord.RichEmbed()
 					.setTitle("Scrambles :");
 	for (let i = 0; i < msgArr.length; i++) {
-		embed.addField(i+1, msgArr[i]);
+		embed.addField(i + 1 + ".", "```" + msgArr[i] + "```");
 	}
 	return message.channel.send(embed);
 };

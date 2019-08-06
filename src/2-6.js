@@ -8,11 +8,11 @@ module.exports.run = async (bot, message, args, cube) => {
 	let six = relay.sixx();
 	let embed = new Discord.RichEmbed()
 					.setTitle("Scrambles :")
-					.addField("2x2 : ", two)
-					.addField("3x3 : ", three)
-					.addField("4x4 : ", four)
-					.addField("5x5 : ", five)
-					.addField("6x6 : ", six);
+					.addField("2x2 : ", "```" + two + "```")
+					.addField("3x3 : ", "```" + three + "```")
+					.addField("4x4 : ", "```" + four + "```")
+					.addField("5x5 : ", "```" + five + "```")
+					.addField("6x6 : ", "```" + six + "```");
 	return message.channel.send(embed);
 };
 module.exports.config = { name: "2-6", aliases: [] };
